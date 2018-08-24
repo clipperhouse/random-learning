@@ -21,3 +21,12 @@ img.favicon {
   background-repeat: no-repeat;
   background-position: left center;
 }
+
+a[href^='https://github.com'] {
+  padding-right: 22px;
+  padding-left: 2px;
+  background-image: url(https://assets-cdn.github.com/favicon.ico);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 16px 16px;
+}
