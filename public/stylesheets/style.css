@@ -1,0 +1,23 @@
+body {
+  padding: 50px;
+  font-weight: normal;
+  font-family: HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img.favicon {
+  width: 32px;
+  height: 32px;
+}
+
+.khan {
+  padding-left: 24px;
+  background-image: url(https://www.khanacademy.org/favicon.ico);
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
