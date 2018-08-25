@@ -27,6 +27,9 @@
     return Object.prototype.toString.call(obj) === "[object Array]";
   }
 
+  const default_img =
+    "https://cdn.kastatic.org/googleusercontent/ZCdwTudJg6e6n-P2gsaUborP4izvMsGo71pvEVlX9dNYWcLXcP7VHkWpn2grt4TUP1KoJLQP9NswyHBuBLSFTBw";
+
   function getFirstTopicVideo(obj) {
     if (!obj) {
       return null;
@@ -36,7 +39,9 @@
       return null;
     }
 
-    let children = obj["children"];
+    let topic = obj;
+
+    let children = topic["children"];
     if (!children || !isArray(children)) {
       return null;
     }
@@ -49,23 +54,22 @@
       return null;
     }
 
-    if (
-      first["image_url"] ===
-      "https://cdn.kastatic.org/googleusercontent/ZCdwTudJg6e6n-P2gsaUborP4izvMsGo71pvEVlX9dNYWcLXcP7VHkWpn2grt4TUP1KoJLQP9NswyHBuBLSFTBw"
-    ) {
+    let video = first;
+
+    if (default_img === video["image_url"]) {
       return null;
     }
 
     return {
-      title: first["title"],
-      description: first["description"],
-      url: first["ka_url"],
-      image_url: first["image_url"],
+      title: topic["title"],
+      description: video["description"],
+      url: video["ka_url"],
+      image_url: video["image_url"],
       favicon_url: "https://www.khanacademy.org/favicon.ico",
       site: "Khan Academy",
       site_class: "khan",
-      authors: first["author_names"].join(", "),
-      duration: time(first["duration"]) + " minutes"
+      authors: video["author_names"].join(", "),
+      duration: time(video["duration"]) + " minutes"
     };
   }
 
