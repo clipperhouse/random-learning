@@ -30,3 +30,7 @@ a[href^='https://github.com'] {
   background-position: right center;
   background-size: 16px 16px;
 }
+
+figure {
+  margin-left: 0;
+}

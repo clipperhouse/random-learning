@@ -31,6 +31,8 @@
     "https://cdn.kastatic.org/googleusercontent/ZCdwTudJg6e6n-P2gsaUborP4izvMsGo71pvEVlX9dNYWcLXcP7VHkWpn2grt4TUP1KoJLQP9NswyHBuBLSFTBw";
 
   function getFirstTopicVideo(obj) {
+    // We want this first video for Topic → Topic → Video
+
     if (!obj) {
       return null;
     }
@@ -39,31 +41,56 @@
       return null;
     }
 
+    if (!publish(obj)) {
+      return null;
+    }
+
+    // We know we're on a Topic node
     let topic = obj;
 
-    let children = topic["children"];
-    if (!children || !isArray(children)) {
+    // If no Topic children, never mind
+    let topic_children = topic["children"];
+    if (!topic_children || !isArray(topic_children)) {
       return null;
     }
 
-    let first = children[0];
-    if (!first) {
+    let subtopic = topic_children[0];
+    if (!subtopic) {
       return null;
     }
-    if (first["content_kind"] !== "Video") {
+    if (subtopic["content_kind"] !== "Topic") {
+      return null;
+    }
+    if (!publish(subtopic)) {
       return null;
     }
 
-    let video = first;
+    // If no Video children, never mind
+    let video_children = subtopic["children"];
+    if (!video_children || !isArray(video_children)) {
+      return null;
+    }
 
+    let video = video_children[0];
+    if (!video) {
+      return null;
+    }
+    if (video["content_kind"] !== "Video") {
+      return null;
+    }
+    if (!publish(video)) {
+      return null;
+    }
+
+    // Choose those with a real preview
     if (default_img === video["image_url"]) {
       return null;
     }
 
     return {
       title: topic["title"],
-      description: video["description"],
-      url: video["ka_url"],
+      description: video["title"],
+      url: topic["ka_url"] + "/modal/v/" + video["slug"],
       image_url: video["image_url"],
       favicon_url: "https://www.khanacademy.org/favicon.ico",
       site: "Khan Academy",
@@ -71,6 +98,20 @@
       authors: video["author_names"].join(", "),
       duration: time(video["duration"]) + " minutes"
     };
+  }
+
+  function publish(obj) {
+    let deleted = obj["deleted"];
+    if (deleted && deleted === true) {
+      return false;
+    }
+
+    let do_not_publish = obj["do_not_publish"];
+    if (do_not_publish && do_not_publish === true) {
+      return false;
+    }
+
+    return true;
   }
 
   function time(secs) {
