@@ -1,16 +1,18 @@
- {{#videos}}
-<a href="{{url}}">
-    <h3>
-        {{title}}
-    </h3>
+{{#videos}}
+<div class="entry">
+    <a href="{{url}}">
+        <h4>
+            {{title}}
+        </h4>
 
-    <figure>
-        <img src={{image_url}} alt="{{title}}" />
-        <figcaption>{{description}}</figcaption>
-    </figure>
+        <figure>
+            <img src={{image_url}} alt="{{title}}" />
+            <figcaption>{{description}}</figcaption>
+        </figure>
 
-    <p class="{{site_class}}">
-        {{site}}, {{duration}}
-    </p>
-</a>
-<hr /> {{/videos}}
+        <p class="{{site_class}}">
+            {{site}}, {{duration}}
+        </p>
+    </a>
+</div>
+{{/videos}}

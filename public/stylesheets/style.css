@@ -31,6 +31,30 @@ a[href^='https://github.com'] {
   background-size: 16px 16px;
 }
 
+.entry {
+  float: left;
+  width: 600px;
+  margin: 0 60px 30px 0;
+}
+
+.entry h4 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.entry img {
+  width: 100%;
+}
+
 figure {
+  width: 100%;
   margin-left: 0;
+  margin-bottom: 2rem;
+}
+
+footer {
+  border-top: 1px solid #999;
+  padding: 2.5em 0;
+  clear: both;
 }
