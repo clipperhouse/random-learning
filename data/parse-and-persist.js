@@ -48,6 +48,10 @@
     // We know we're on a Topic node
     let topic = obj;
 
+    if (!topicOK(topic["title"])) {
+      return null;
+    }
+
     // If no Topic children, never mind
     let topic_children = topic["children"];
     if (!topic_children || !isArray(topic_children)) {
@@ -98,6 +102,13 @@
       authors: video["author_names"].join(", "),
       duration: time(video["duration"]) + " minutes"
     };
+  }
+
+  const module = /^Module/;
+  const nums = /^\d+\./;
+
+  function topicOK(title) {
+    return !module.test(title) && !module.test(nums);
   }
 
   function publish(obj) {
