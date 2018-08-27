@@ -108,7 +108,7 @@
   const nums = /^\d+\./;
 
   function topicOK(title) {
-    return !module.test(title) && !module.test(nums);
+    return !module.test(title) && !nums.test(title);
   }
 
   function publish(obj) {
