@@ -16,6 +16,5 @@
 # Node.js dependencies:
 node_modules/
 
-data/topictree.f.json
-data/parse-and-persist.js
+data/khan/
 .vscode/
